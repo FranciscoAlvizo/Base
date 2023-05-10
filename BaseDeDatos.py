@@ -189,3 +189,10 @@ def insertar_alumno(nombre, carrera, matricula):
     )
     conn.commit()
     conn.close()
+
+def consultar_observacion():
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Especie, Tecnica, TipoDeMuestra, Tincion, Coordenadas, OrigenDeMuestra, NumeroDeImagen FROM Observacion")
+    observacion = cursor.fetchall()
+    return observacion

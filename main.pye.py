@@ -283,69 +283,63 @@ def abrir_formulario_laminillas():
 
     # Etiquetas
 
-    label1 = ttk.Label(ventana_formulario, text="NUMERO DE LAMINILLA:",  background="#0b3473", font=("Arial", 16), foreground="White")
-    label1.place(x= 150, y=110)
+    label1 = ttk.Label(ventana_formulario, text="Numero de laminilla:",  background="#0b3473", font=("Arial", 16), foreground="White")
+    label1.place(x= 150, y=150)
 
-    label2 = ttk.Label(ventana_formulario, text="TIPO DE MUESTRA:", background="#0b3473", font=("Arial", 16), foreground="White" )
-    label2.place(x= 450, y=110)
+    label2 = ttk.Label(ventana_formulario, text="Especie:", background="#0b3473", font=("Arial", 16), foreground="White" )
+    label2.place(x= 450, y=150)
 
-    label3 = ttk.Label(ventana_formulario, text="ESPECIE:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
-    label3.place(x=150, y=200)
-
-    label4 = ttk.Label(ventana_formulario, text="TINCION:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
+    label4 = ttk.Label(ventana_formulario, text="Tincion:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
     label4.place(x= 150, y=300)
 
-    label5 = ttk.Label(ventana_formulario, text="AUMENTO:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
-    label5.place(x= 450, y=300)
+    label3 = ttk.Label(ventana_formulario, text="Tipo de Muestra:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
+    label3.place(x=450, y=300)
 
-    label6 = ttk.Label(ventana_formulario, text="OBSERVACIONES:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
-    label6.place(x= 150, y=400)
+    label5 = ttk.Label(ventana_formulario, text="Observaciones:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
+    label5.place(x= 150, y=400)
 
     tipomuestra = consultar_tipomuestra()    
 
     # Campos de entrada
-    entry1 = ttk.Entry(ventana_formulario, width=20, font=("Arial", 12))
-    entry1.place(x= 150, y=150)
+    entry1 = ttk.Entry(ventana_formulario, width=20, font=("Arial", 12)) #Numero de laminilla
+    entry1.place(x= 150, y=200)
 
-    entry2 = ttk.Entry(ventana_formulario, width=20, font=("Arial", 12))
-    entry2.place(x= 450, y=150)
-
-    entry3 = ttk.Entry(ventana_formulario, width=40, font=("Arial", 12))
-    entry3.place(x=150, y=230)
+    entry2 = ttk.Entry(ventana_formulario, width=20, font=("Arial", 12)) # Especie
+    entry2.place(x= 450, y=200)
 
     tincion = consultar_tinciones()
-    tecnica = consultar_tecnicas()
+    observacion = consultar_observacion()
 
     # Cuadros combinados
-    combo1 = ttk.Combobox(ventana_formulario, values= tincion,  width=20, font=("Arial", 12))
-    combo1.place(x= 150, y=340)
+    combo1 = ttk.Combobox(ventana_formulario, values= tincion,  width=20, font=("Arial", 12)) # Tincion
+    combo1.place(x= 150, y=350)
 
-    combo2 = ttk.Combobox(ventana_formulario, values= tipomuestra,  width=20, font=("Arial", 12))
-    combo2.place(x= 450, y=150)
+    combo2 = ttk.Combobox(ventana_formulario, values= tipomuestra,  width=20, font=("Arial", 12)) # Tipo Muestra
+    combo2.place(x= 450, y=350)
 
-    combo3 = ttk.Combobox(ventana_formulario, values=["1"] , width=40, font=("Arial", 12))
-    combo3.place(x= 150, y=440)
-
-    # Botón Guardar
-    boton_guardar = ttk.Button(ventana_formulario, text="Guardar", command=insertar_laminilla)
-    boton_guardar.place(x=350, y=500)
-   
+    combo3 = ttk.Combobox(ventana_formulario, values= observacion, width=40, font=("Arial", 12)) # Observaciones
+    combo3.place(x= 150, y= 440)
+  
     def insertar_laminilla():
         numero_laminilla = entry1.get()
         tipo_muestra = combo2.get()
-        especie = entry3.get()
+        especie = entry2.get()
         tincion = combo1.get()
-        aumento = combo3.get()
-        observaciones = entry4.get()
-        if numero_laminilla and tipo_muestra and especie and tincion and aumento and observaciones:
-            insertar_laminilla(numero_laminilla, tipo_muestra, especie, tincion, aumento, observaciones)
+        observacion = combo3.get()
+        if numero_laminilla and tipo_muestra and especie and tincion and observacion:
+            insertar_laminilla(numero_laminilla, tipo_muestra, especie, tincion, observacion)
             messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
         else:
             messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
 
+    # Botón Guardar
+    boton_guardar = ttk.Button(ventana_formulario, text="Guardar", command=insertar_laminilla)
+    boton_guardar.place(x=350, y=500)
+
     ventana_formulario.geometry("800x600")  # Establecer las dimensiones deseadas
     ventana_formulario.resizable(False, False)  # Deshabilitar el cambio de tamaño   
     ventana_formulario.mainloop()
+
 
 
 
