@@ -32,7 +32,7 @@ def mostrar_ventana_principal():
     label_fondo = tk.Label(ventana_principal, image=imagen_fondo)
     label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
 
-    btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command="")
+    btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command=aplicar_filtro)
     btn_crear = tk.Button(ventana_principal, text="Crear", command=mostrar_ventana_observacion)
     btn_menuadmi = tk.Button(ventana_principal, text="Menu", command=mostrar_ventana_menu)
 
@@ -78,13 +78,16 @@ def mostrar_ventana_principal():
 
 
     # Crear un Combobox
-    combolamin = ttk.Combobox(ventana_principal, values=["Opción 1", "Opción 2", "Opción 3"])
+
+    tecnicas = consultar_tecnicas()
+    tinciones = consultar_tinciones()
+    combolamin = ttk.Combobox(ventana_principal, values=["1","2","3"])
     combolamin.place(x=150, y=145)
 
-    combotec = ttk.Combobox(ventana_principal, values=["Opción 1", "Opción 2", "Opción 3"])
+    combotec = ttk.Combobox(ventana_principal,values = tecnicas)
     combotec.place(x=320, y=145)
 
-    combotri = ttk.Combobox(ventana_principal, values=["Opción 1", "Opción 2", "Opción 3"])
+    combotri = ttk.Combobox(ventana_principal, values = tinciones)
     combotri.place(x=500, y=145)
 
 
@@ -118,7 +121,8 @@ def mostrar_ventana_registro():
     label_contrasena = tk.Label(ventana_registro, text="Contraseña:",  background="#193a68", font=("Arial", 18), foreground="White")
     entry_contrasena = tk.Entry(ventana_registro, show="*")
     label_rol = tk.Label(ventana_registro, text="Rol:")
-    combo_rol = ttk.Combobox(ventana_registro, values=["1", "2"])
+    roles = consulta_roles()
+    combo_rol = ttk.Combobox(ventana_registro, values=roles)
 
     # Posicionar las etiquetas y los campos de entrada en la ventana de registro
     label_nombre.place(x=300, y=150)
@@ -248,6 +252,11 @@ def mostrar_ventana_menu():
     ventana_menu.resizable(False, False)  # Deshabilitar el cambio de tamaño
 
     ventana_menu.mainloop()
+
+def aplicar_filtro():
+    combotec = combotec.get()
+    combotri = combotri.get()
+
 
 
 def abrir_formulario_laminillas():
