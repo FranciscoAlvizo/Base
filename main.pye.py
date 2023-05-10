@@ -330,7 +330,18 @@ def abrir_formulario_laminillas():
     boton_guardar = ttk.Button(ventana_formulario, text="Guardar", command=insertar_laminilla)
     boton_guardar.place(x=350, y=500)
    
-
+    def insertar_laminilla():
+        numero_laminilla = entry1.get()
+        tipo_muestra = combo2.get()
+        especie = entry3.get()
+        tincion = combo1.get()
+        aumento = combo3.get()
+        observaciones = entry4.get()
+        if numero_laminilla and tipo_muestra and especie and tincion and aumento and observaciones:
+            insertar_laminilla(numero_laminilla, tipo_muestra, especie, tincion, aumento, observaciones)
+            messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
+        else:
+            messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
 
     ventana_formulario.geometry("800x600")  # Establecer las dimensiones deseadas
     ventana_formulario.resizable(False, False)  # Deshabilitar el cambio de tamaño   
@@ -367,7 +378,7 @@ def mostrar_ventana_tecnica():
     comentarios.place(x=250, y=240)
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_tecnica, text="Guardar")
+    btn_guardar = tk.Button(crear_tecnica, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
     def crear_tecnica():
@@ -415,7 +426,7 @@ def mostrar_ventana_tincion():
     comentarios.place(x=250, y=240)
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_tincion, text="Guardar")
+    btn_guardar = tk.Button(crear_tincion, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
     def crear_tincion():
@@ -470,7 +481,7 @@ def mostrar_ventana_alumno():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_alumno, text="Guardar")
+    btn_guardar = tk.Button(crear_alumno, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
     def crear_alumno():
@@ -523,7 +534,7 @@ def mostrar_ventana_carrera():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_carrera, text="Guardar")
+    btn_guardar = tk.Button(crear_carrera, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
     def crear_carrera():
@@ -576,10 +587,10 @@ def mostrar_ventana_roles():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_roles, text="Guardar")
+    btn_guardar = tk.Button(crear_roles, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
-    def crear_role():
+    def crear_roles():
         nombre = entry1.get()
         descripcion = entry2.get()
         if nombre and descripcion:
