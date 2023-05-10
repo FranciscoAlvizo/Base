@@ -1,8 +1,6 @@
 #Aqui van las funciones de base de datos
 import sqlite3
 
-
-
 def verificar_credenciales(matricula, password):
     # Establecer la conexión a la base de datos
     conn = sqlite3.connect('microdex.db')

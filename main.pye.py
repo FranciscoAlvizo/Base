@@ -539,14 +539,15 @@ def mostrar_ventana_Usuario123():
     entry1.place(x=150, y=160)
     
     entry2 = ttk.Entry(ventana_Usuario1, width=30)
-    entry2.place(x=150, y=230)
+    entry2.place(x=150, y=300)
     
     # Campo de contraseña
     entry_password = ttk.Entry(ventana_Usuario1, show="*", width=30)
-    entry_password.place(x=150, y=300)
+    entry_password.place(x=150, y=230)
     
+    roles = consulta_roles.get()
     # Cuadro combinado
-    combo1 = ttk.Combobox(ventana_Usuario1, values=["Administradir", "Usuario"], width=30)
+    combo1 = ttk.Combobox(ventana_Usuario1, values=roles, width=30)
     combo1.place(x=150, y=370)
    
     
