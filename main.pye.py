@@ -65,9 +65,6 @@ def mostrar_ventana_principal():
     tabla.place(x=125, y=200, width=ancho, height=alto)
 
     # Etiquetas y campos de entrada para el nombre, matrícula y contraseña
-    label_laminilla = tk.Label(ventana_principal, text="Laminilla:", background="#0b3473", font=("Arial", 16), foreground="White")
-    label_laminilla.place(x= 150, y=110)
-
     label_tec = tk.Label(ventana_principal, text="Tipo de tecnica:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_tec.place(x= 320, y=110)
 
@@ -81,8 +78,6 @@ def mostrar_ventana_principal():
 
     tecnicas = consultar_tecnicas()
     tinciones = consultar_tinciones()
-    combolamin = ttk.Combobox(ventana_principal, values=["1","2","3"])
-    combolamin.place(x=150, y=145)
 
     combotec = ttk.Combobox(ventana_principal,values = tecnicas)
     combotec.place(x=320, y=145)
