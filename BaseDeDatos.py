@@ -99,7 +99,7 @@ def insertar_roles(nombre,descripcion):
     conn.commit()
     conn.close()
 
-def insert_carreras(nombre,descripcion):
+def insertar_carreras(nombre,descripcion):
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()
     cursor.execute(
@@ -179,3 +179,13 @@ def consultar_tipomuestra():
     cursor.execute("SELECT Nombre FROM TipoMuestra")
     tipomuestra = cursor.fetchall()
     return tipomuestra
+
+def insertar_alumno(nombre, carrera, matricula):
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO Alumnos (Nombre, Carrera, Matricula) VALUES (?, ?, ?)",
+        (nombre, carrera, matricula)
+    )
+    conn.commit()
+    conn.close()

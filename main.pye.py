@@ -238,7 +238,7 @@ def mostrar_ventana_menu():
     btn_accion2 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=abrir_formulario_laminillas)
     btn_accion3 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_carrera)
     btn_accion4 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_tecnica)
-    btn_accion5 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_alumno)
+    btn_accion5 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_roles)
     btn_accion6 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_tincion)
 
 
@@ -370,7 +370,15 @@ def mostrar_ventana_tecnica():
     btn_guardar = tk.Button(ventana_tecnica, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
-
+    def crear_tecnica():
+        nombre = entry1.get()
+        descripcion = comentarios.get("1.0", tk.END)
+        if nombre and descripcion:
+            insertar_tecnica(nombre, descripcion)
+            messagebox.showinfo(message="Carrera creada con éxito", title="Éxito")
+            ventana_tecnica.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
 
 
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
@@ -410,9 +418,16 @@ def mostrar_ventana_tincion():
     btn_guardar = tk.Button(ventana_tincion, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
-
-
-
+    def crear_tincion():
+        nombre = entry1.get()
+        descripcion = comentarios.get("1.0", tk.END)
+        if nombre and descripcion:
+            insertar_tincion(nombre, descripcion)
+            messagebox.showinfo(message="Carrera creada con éxito", title="Éxito")
+            ventana_tincion.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
+        
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
     ventana_tincion.geometry("800x600")  # Establecer las dimensiones deseadas
     ventana_tincion.resizable(False, False)  # Deshabilitar el cambiventana_tecnica
@@ -458,7 +473,16 @@ def mostrar_ventana_alumno():
     btn_guardar = tk.Button(ventana_alumno, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
-
+    def crear_alumno():
+        nombre = entry1.get()
+        matricula = entry2.get()
+        carrera = entry3.get()
+        if nombre and matricula and carrera:
+            insertar_alumno(nombre, matricula, carrera)
+            messagebox.showinfo(message="Alumno creado con éxito", title="Éxito")
+            ventana_alumno.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
 
 
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
@@ -502,7 +526,16 @@ def mostrar_ventana_carrera():
     btn_guardar = tk.Button(ventana_carrera, text="Guardar")
     btn_guardar.place(x=350, y=490)
 
-
+    def crear_carrera():
+        nombre = entry1.get()
+        descripcion = entry2.get()
+        carrera = carrera(nombre, descripcion)
+        if nombre and descripcion:
+            insertar_carreras(nombre, descripcion)
+            messagebox.showinfo(message="Carrera creada con éxito", title="Éxito")
+            ventana_carrera.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
 
 
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
@@ -510,6 +543,57 @@ def mostrar_ventana_carrera():
     ventana_carrera.resizable(False, False)  # Deshabilitar el cambiventana_tecnica
     ventana_carrera.mainloop()
 
+def mostrar_ventana_roles():
+    ventana_roles= tk.Toplevel()
+    ventana_roles.title("Roles")
+    # Cargar la imagen de fondo
+    imagen_fondo = tk.PhotoImage(file="img/1.png")
+
+    # Crear un Label con la imagen de fondo y colocarlo en la ventana
+    label_fondo = tk.Label(ventana_roles, image=imagen_fondo)
+    label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
+
+    # Etiquetas
+    label1 = ttk.Label(ventana_roles, text="Nombre:",  background="#0b3473", font=("Arial", 16), foreground="White")
+    label1.place(x= 150, y=110)
+    
+    label2 = ttk.Label(ventana_roles, text="Descripcion",  background="#0b3473", font=("Arial", 16), foreground="White")
+    label2.place(x= 150, y=200)
+    
+    
+    
+    label4 = ttk.Label(ventana_roles, text="Roles",  background="#0b3473", font=("Arial", 20), foreground="White")
+    label4.place(x= 340, y=80)
+
+    # Campos de entrada
+    entry1 = ttk.Entry(ventana_roles, width=40)
+    entry1.place(x= 150, y=150)
+    
+    entry2 = ttk.Entry(ventana_roles, width=40)
+    entry2.place(x=150, y=240)
+    
+    
+    
+    
+    # Botón Guardar
+    btn_guardar = tk.Button(ventana_roles, text="Guardar")
+    btn_guardar.place(x=350, y=490)
+
+    def crear_role():
+        nombre = entry1.get()
+        descripcion = entry2.get()
+        if nombre and descripcion:
+            insertar_roles(nombre, descripcion)
+            messagebox.showinfo(message="Rol creado con éxito", title="Éxito")
+            ventana_roles.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
+
+
+    # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
+    ventana_roles.geometry("800x600")  # Establecer las dimensiones deseadas
+    ventana_roles.resizable(False, False)  # Deshabilitar el cambiventana_tecnica
+    ventana_roles.mainloop()
 
 def mostrar_ventana_Usuario123():
     ventana_Usuario1= tk.Toplevel()
@@ -696,7 +780,7 @@ imagen_fondo = ImageTk.PhotoImage(imagen_fondo)
 label_fondo = tk.Label(ventana_login, image=imagen_fondo)
 label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
 
-label_usuario = tk.Label(ventana_login, text="Usuario", font=("Arial", 18), background="#083c71", foreground="White" )
+label_usuario = tk.Label(ventana_login, text="Matricula", font=("Arial", 18), background="#083c71", foreground="White" )
 entry_usuario = tk.Entry(ventana_login, width=20, font=("Arial", 12))   
 
 label_contrasena = tk.Label(ventana_login, text="Contraseña", background="#083c71", font=("Arial", 18), foreground="White")
