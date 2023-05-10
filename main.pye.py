@@ -34,7 +34,7 @@ def mostrar_ventana_principal():
 
    
     btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command=aplicar_filtro)
-    btn_crear = tk.Button(ventana_principal, text="Crear", command=mostrar_ventana_observacion)
+    btn_crear = tk.Button(ventana_principal, text="Crear", command=abrir_formulario_laminillas)
     btn_menuadmi = tk.Button(ventana_principal, text="Menu", command=mostrar_ventana_menu)
     btn_treefil = tk.Button(ventana_principal, text="Filtrar Especie", command=lambda:(filtrar_datos()))
     tabla = ttk.Treeview(ventana_principal, columns=("Laminilla", "NumLaminilla", "TipoMuestra", "Especie", "Tincion","Observaciones"))
@@ -301,9 +301,8 @@ def abrir_formulario_laminillas():
     label6 = ttk.Label(ventana_formulario, text="OBSERVACIONES:" ,  background="#0b3473", font=("Arial", 16), foreground="White")
     label6.place(x= 150, y=400)
 
+    tipomuestra = consultar_tipomuestra()    
 
-
-    
     # Campos de entrada
     entry1 = ttk.Entry(ventana_formulario, width=20, font=("Arial", 12))
     entry1.place(x= 150, y=150)
@@ -314,18 +313,21 @@ def abrir_formulario_laminillas():
     entry3 = ttk.Entry(ventana_formulario, width=40, font=("Arial", 12))
     entry3.place(x=150, y=230)
 
+    tincion = consultar_tinciones()
+    tecnica = consultar_tecnicas()
+
     # Cuadros combinados
-    combo1 = ttk.Combobox(ventana_formulario, values=["Opción 1", "Opción 2", "Opción 3"],  width=20, font=("Arial", 12))
+    combo1 = ttk.Combobox(ventana_formulario, values= tincion,  width=20, font=("Arial", 12))
     combo1.place(x= 150, y=340)
 
-    combo2 = ttk.Combobox(ventana_formulario, values=["Opción A", "Opción B", "Opción C"],  width=20, font=("Arial", 12))
-    combo2.place(x= 450, y=340)
+    combo2 = ttk.Combobox(ventana_formulario, values= tipomuestra,  width=20, font=("Arial", 12))
+    combo2.place(x= 450, y=150)
 
-    combo3 = ttk.Combobox(ventana_formulario, values=["Opción X", "Opción Y", "Opción Z"], width=40, font=("Arial", 12))
+    combo3 = ttk.Combobox(ventana_formulario, values=["1"] , width=40, font=("Arial", 12))
     combo3.place(x= 150, y=440)
 
     # Botón Guardar
-    boton_guardar = ttk.Button(ventana_formulario, text="Guardar", command="")
+    boton_guardar = ttk.Button(ventana_formulario, text="Guardar", command=insertar_laminilla)
     boton_guardar.place(x=350, y=500)
    
 

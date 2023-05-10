@@ -131,6 +131,22 @@ def insertar_observacion(especie,idtecnica,tipomuestra,idtincion,coordenadas,ori
     conn.commit()
     conn.close()
 
+def consulta_carreras():
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Nombre FROM Carreras")
+    carreras = cursor.fetchall()
+    return carreras
+
+def consulta_alumnos():
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Nombre FROM Alumnos")
+    alumnos = cursor.fetchall()
+    return alumnos
+
+
+
 def consulta_roles():
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()
@@ -148,3 +164,20 @@ def obtener_datos_laminilla():
     datos_laminilla = cursor.fetchall()
     conn.close()
     return datos_laminilla
+
+def insertar_tipomuestra(nombre,descripcion):
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO TipoMuestra (Nombre, Descripcion) VALUES (?, ?)",
+        (nombre, descripcion)
+    )
+    conn.commit()
+    conn.close()
+
+def consultar_tipomuestra():
+    conn = sqlite3.connect("microdex.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT Nombre FROM TipoMuestra")
+    tipomuestra = cursor.fetchall()
+    return tipomuestra
