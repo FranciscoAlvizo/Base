@@ -32,11 +32,12 @@ def mostrar_ventana_principal():
     label_fondo = tk.Label(ventana_principal, image=imagen_fondo)
     label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
 
+   
     btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command=aplicar_filtro)
     btn_crear = tk.Button(ventana_principal, text="Crear", command=mostrar_ventana_observacion)
     btn_menuadmi = tk.Button(ventana_principal, text="Menu", command=mostrar_ventana_menu)
-
-    tabla = ttk.Treeview(ventana_principal, columns=("Laminilla", "NumLaminilla", "TipoMuestra", "Especie", "Tincion", "Aumento", "Observaciones"))
+    btn_treefil = tk.Button(ventana_principal, text="Filtrar Especie", command=lambda:(filtrar_datos()))
+    tabla = ttk.Treeview(ventana_principal, columns=("Laminilla", "NumLaminilla", "TipoMuestra", "Especie", "Tincion","Observaciones"))
     tabla.column("#0", width=0, stretch=tk.NO)
     
     tabla.heading("Laminilla", text="id Laminilla")
@@ -44,7 +45,6 @@ def mostrar_ventana_principal():
     tabla.heading("TipoMuestra", text="Tipo de Muestra")
     tabla.heading("Especie", text="Especie")
     tabla.heading("Tincion", text="Tinción")
-    tabla.heading("Aumento", text="Aumento")
     tabla.heading("Observaciones", text="Observaciones")
 
 
@@ -53,8 +53,12 @@ def mostrar_ventana_principal():
     tabla.column("TipoMuestra", width=40)        
     tabla.column("Especie", width=30)    
     tabla.column("Tincion", width=30)
-    tabla.column("Aumento", width=30)
     tabla.column("Observaciones", width=50)
+    # Insertar los datos en el Treeview
+    datos_laminilla = obtener_datos_laminilla() 
+
+    for datos in datos_laminilla:
+        tabla.insert("", "end", values=datos)
 
     tabla.update()
 
@@ -64,7 +68,9 @@ def mostrar_ventana_principal():
     tabla.configure(height=alto)
     tabla.place(x=125, y=200, width=ancho, height=alto)
 
-    # Etiquetas y campos de entrada para el nombre, matrícula y contraseña
+    # Etiquetas 
+    btn_treefil.place(x= 150, y=110)
+
     label_tec = tk.Label(ventana_principal, text="Tipo de tecnica:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_tec.place(x= 320, y=110)
 
@@ -79,6 +85,9 @@ def mostrar_ventana_principal():
     tecnicas = consultar_tecnicas()
     tinciones = consultar_tinciones()
 
+    entry_lami = ttk.Entry(ventana_principal)
+    entry_lami.place(x=150, y=145)
+
     combotec = ttk.Combobox(ventana_principal,values = tecnicas)
     combotec.place(x=320, y=145)
 
@@ -89,6 +98,14 @@ def mostrar_ventana_principal():
     btn_filtrar.place(x=550, y= 40)
     btn_crear.place(x=600, y= 40)
     btn_menuadmi.place(x=750, y=550)
+
+    def filtrar_datos():
+        especie_filtrada = entry_lami.get()
+        tabla.delete(*tabla.get_children())
+        datos_laminilla = obtener_datos_laminilla()
+        for datos in datos_laminilla:
+            if not especie_filtrada or datos[3] == especie_filtrada:
+                tabla.insert("", "end", values=datos)
     
 
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana

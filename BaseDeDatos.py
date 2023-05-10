@@ -137,3 +137,14 @@ def consulta_roles():
     cursor.execute("SELECT Nombre FROM Roles")
     roles = cursor.fetchall()
     return roles
+
+
+#Consulta para obtener datos hacia el treeview
+
+def obtener_datos_laminilla():
+    conn = sqlite3.connect("microdex.db")  # Reemplaza "ruta_a_tu_base_de_datos.db" con la ruta a tu archivo de base de datos
+    cursor = conn.cursor()
+    cursor.execute("SELECT IdLaminilla, NumeroDeLaminilla, TipoDeMuestra, Especie, Tincion, Observacion FROM Laminilla")
+    datos_laminilla = cursor.fetchall()
+    conn.close()
+    return datos_laminilla
