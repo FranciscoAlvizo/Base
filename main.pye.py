@@ -378,7 +378,7 @@ def mostrar_ventana_tecnica():
     comentarios.place(x=250, y=240)
     
     # Botón Guardar
-    btn_guardar = tk.Button(crear_tecnica, text="Guardar")
+    btn_guardar = tk.Button(ventana_tecnica, text="Guardar", command=crear_tecnica)
     btn_guardar.place(x=350, y=490)
 
     def crear_tecnica():
@@ -426,7 +426,7 @@ def mostrar_ventana_tincion():
     comentarios.place(x=250, y=240)
     
     # Botón Guardar
-    btn_guardar = tk.Button(crear_tincion, text="Guardar")
+    btn_guardar = tk.Button(ventana_tincion, text="Guardar", command=crear_tincion)
     btn_guardar.place(x=350, y=490)
 
     def crear_tincion():
@@ -481,7 +481,7 @@ def mostrar_ventana_alumno():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(crear_alumno, text="Guardar")
+    btn_guardar = tk.Button(ventana_alumno, text="Guardar", command=crear_alumno)
     btn_guardar.place(x=350, y=490)
 
     def crear_alumno():
@@ -534,7 +534,7 @@ def mostrar_ventana_carrera():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(crear_carrera, text="Guardar")
+    btn_guardar = tk.Button(ventana_carrera, text="Guardar",command=crear_carrera)
     btn_guardar.place(x=350, y=490)
 
     def crear_carrera():
@@ -587,7 +587,7 @@ def mostrar_ventana_roles():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(crear_roles, text="Guardar")
+    btn_guardar = tk.Button(ventana_roles, text="Guardar", command=crear_roles)
     btn_guardar.place(x=350, y=490)
 
     def crear_roles():
@@ -648,10 +648,20 @@ def mostrar_ventana_Usuario123():
     
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_Usuario1, text="Guardar")
+    btn_guardar = tk.Button(ventana_Usuario1, text="Guardar", command=crear_usuario)
     btn_guardar.place(x=350, y=490)
 
-
+    def crear_usuario():
+        nombre = entry1.get()
+        password = entry_password.get()
+        matricula = entry2.get()
+        rol = combo1.get()
+        if nombre and password and matricula and rol:
+            insertar_usuario(nombre, password, matricula, rol)
+            messagebox.showinfo(message="Usuario creado con éxito", title="Éxito")
+            ventana_Usuario1.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
 
     labeltitulo = ttk.Label(ventana_Usuario1, text="Carrera",  background="#0b3473", font=("Arial", 20), foreground="White")
     labeltitulo.place(x= 340, y=80)
@@ -733,8 +743,23 @@ def mostrar_ventana_observacion():
 
     
     # Botón Guardar
-    btn_guardar = tk.Button(ventana_obser1, text="Guardar")
+    btn_guardar = tk.Button(ventana_obser1, text="Guardar" , command=crear_observacion)
     btn_guardar.place(x=350, y=490)
+
+    def crear_observacion():
+        origen = entry_Origen.get()
+        muestra = entry_Muestra.get()
+        especie = entry_Especie.get()
+        coordenada = entry_Coordenada.get()
+        tecnica = combo3.get()
+        tincion = combo4.get()
+        aumento = combo5.get()
+        if origen and muestra and especie and coordenada and tecnica and tincion and aumento:
+            insertar_observacion(origen, muestra, especie, coordenada, tecnica, tincion, aumento)
+            messagebox.showinfo(message="Observación creada con éxito", title="Éxito")
+            ventana_obser1.destroy()
+        else:
+            messagebox.showerror(message="Faltan campos", title="Error")
 
     # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
     ventana_obser1.geometry("800x600")  # Establecer las dimensiones deseadas
