@@ -53,10 +53,20 @@ def consultar_tinciones():
     tinciones = cursor.fetchall()
     return tinciones
 
+
+def obtener_datos_laminilla():
+    conn = sqlite3.connect("microdex.db")  # Reemplaza "ruta_a_tu_base_de_datos.db" con la ruta a tu archivo de base de datos
+    cursor = conn.cursor()
+    cursor.execute("SELECT IdLaminilla, NumeroDeLaminilla, TipoDeMuestra, Especie, Tincion, Observacion FROM Laminilla")
+    datos_laminilla = cursor.fetchall()
+    conn.close()
+    return datos_laminilla
+
+
 def consultar_laminillas():
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM Laminilla")
+    cursor.execute("SELECT IdLaminilla FROM Laminilla")
     laminillas = cursor.fetchall()
     return laminillas
 
@@ -79,6 +89,7 @@ def insertar_tincion(nombre, descripcion):
     )
     conn.commit()
     conn.close()
+
 def insertar_tecnica(nombre, descripcion):
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()
@@ -154,15 +165,6 @@ def consulta_roles():
 
 
 #Consulta para obtener datos hacia el treeview
-
-def obtener_datos_laminilla():
-    conn = sqlite3.connect("microdex.db")  # Reemplaza "ruta_a_tu_base_de_datos.db" con la ruta a tu archivo de base de datos
-    cursor = conn.cursor()
-    cursor.execute("SELECT IdLaminilla, NumeroDeLaminilla, TipoDeMuestra, Especie, Tincion, Observacion FROM Laminilla")
-    datos_laminilla = cursor.fetchall()
-    conn.close()
-    return datos_laminilla
-
 def insertar_tipomuestra(nombre,descripcion):
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()

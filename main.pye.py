@@ -77,9 +77,6 @@ def mostrar_ventana_principal():
     label_tri = tk.Label(ventana_principal, text="Trincion:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_tri.place(x= 500, y=110)
 
-
-
-
     # Crear un Combobox
 
     tecnicas = consultar_tecnicas()
@@ -232,6 +229,7 @@ def mostrar_ventana_menu():
     label_opcion4 = tk.Label(ventana_menu, text="Tecnicas",  background="#0b3473", font=("Arial", 16), foreground="White")
     label_opcion5 = tk.Label(ventana_menu, text="Roles",     background="#0b3473", font=("Arial", 16), foreground="White")
     label_opcion6 = tk.Label(ventana_menu, text="Tinciones",  background="#0b3473", font=("Arial", 16), foreground="White")
+    label_opcion7 = tk.Label(ventana_menu, text="Observacion",     background="#0b3473", font=("Arial", 16), foreground="White")
 
     # Botones del menú
     btn_accion1 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_Usuario123)
@@ -240,6 +238,7 @@ def mostrar_ventana_menu():
     btn_accion4 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_tecnica)
     btn_accion5 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_roles)
     btn_accion6 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_tincion)
+    btn_accion7 = tk.Button(ventana_menu, text="Acceder", width=20, font=("Arial", 12), command=mostrar_ventana_observacion)
 
 
     # Posicionamiento de las etiquetas y los botones
@@ -255,6 +254,8 @@ def mostrar_ventana_menu():
     btn_accion5.place(x= 170, y=440)
     label_opcion6.place(x= 450, y=390)
     btn_accion6.place(x= 450, y=440)
+    label_opcion7.place(x= 170, y=480)
+    btn_accion7.place(x= 170, y=520)
 
 
 
@@ -665,30 +666,32 @@ def mostrar_ventana_observacion():
 
 
     #Mas Labels
-    label_Origen = tk.Label(ventana_obser1, text="ORIGEN DE MUESTRA:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Origen = tk.Label(ventana_obser1, text="Origen de Muestra:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Origen.place(x=150, y=110)
 
-    label_Muestra = tk.Label(ventana_obser1, text="TIPO DE MUESTRA:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Muestra = tk.Label(ventana_obser1, text="Tipo de Muestra:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Muestra.place(x=150, y=170)
 
-    label_Especie = tk.Label(ventana_obser1, text="ESPECIE:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Especie = tk.Label(ventana_obser1, text="Especie:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Especie.place(x=450, y=170)
 
-    label_Laminilla = tk.Label(ventana_obser1, text="LAMINILLA:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Laminilla = tk.Label(ventana_obser1, text="Laminilla:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Laminilla.place(x=150, y=240)
 
-    label_Coordenada = tk.Label(ventana_obser1, text="COORDENADA:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Coordenada = tk.Label(ventana_obser1, text="Coordenada:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Coordenada.place(x=450, y=230)
 
-    label_Tecnica = tk.Label(ventana_obser1, text="TECNICA:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Tecnica = tk.Label(ventana_obser1, text="Tecnica:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Tecnica.place(x=150, y=310)
 
-    label_Tincion = tk.Label(ventana_obser1, text="TINCION:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Tincion = tk.Label(ventana_obser1, text="Tincion:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Tincion.place(x=330, y=310)
 
-    label_Aumento = tk.Label(ventana_obser1, text="AUMENTO:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_Aumento = tk.Label(ventana_obser1, text="Aumento:", background="#0b3473", font=("Arial", 16), foreground="White")
     label_Aumento.place(x=490, y=310)
 
+    label_numeroimg = tk.Label(ventana_obser1, text="Numero de Imagen:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_numeroimg.place(x=150, y=390)
 
     # Campos de entrada
     entry_Origen = tk.Entry(ventana_obser1)
@@ -704,22 +707,28 @@ def mostrar_ventana_observacion():
     entry_Coordenada = tk.Entry(ventana_obser1)
     entry_Coordenada.place(x=450, y=270)
 
-    
+    entry_aumento = tk.Entry(ventana_obser1)
+    entry_aumento.place(x=490, y=350)
 
-    combo1 = ttk.Combobox(ventana_obser1, values=["op1 ", "Usuario"], width=30)
+    entry_numeroimg = tk.Entry(ventana_obser1)
+    entry_numeroimg.place(x=150, y=420)
+
+    tipomuestra = consultar_tipomuestra()
+    laminilla = consultar_laminillas()
+    tecnica = consultar_tecnicas()
+    tincion = consultar_tinciones()
+
+    combo1 = ttk.Combobox(ventana_obser1, values=tipomuestra, width=30)
     combo1.place(x=150, y=200)
 
-    combo2 = ttk.Combobox(ventana_obser1, values=["op1 ", "Usuario"], width=30)
+    combo2 = ttk.Combobox(ventana_obser1, values=laminilla, width=30)
     combo2.place(x=150, y=270)
 
-    combo3 = ttk.Combobox(ventana_obser1, values=["op1 ", "Usuario"], width=16)
+    combo3 = ttk.Combobox(ventana_obser1, values=tecnica, width=16)
     combo3.place(x=150, y=340)
 
-    combo4 = ttk.Combobox(ventana_obser1, values=["op1 ", "Usuario"], width=16)
+    combo4 = ttk.Combobox(ventana_obser1, values=tincion, width=16)
     combo4.place(x=330, y=340)
-
-    combo5 = ttk.Combobox(ventana_obser1, values=["op1 ", "Usuario"], width=16)
-    combo5.place(x=490, y=340)
 
     def crear_observacion():
         origen = entry_Origen.get()
@@ -728,9 +737,10 @@ def mostrar_ventana_observacion():
         coordenada = entry_Coordenada.get()
         tecnica = combo3.get()
         tincion = combo4.get()
-        aumento = combo5.get()
-        if origen and muestra and especie and coordenada and tecnica and tincion and aumento:
-            insertar_observacion(origen, muestra, especie, coordenada, tecnica, tincion, aumento)
+        aumento = entry_aumento.get()
+        numeroimg = entry_numeroimg.get()
+        if origen and muestra and especie and coordenada and tecnica and tincion and aumento and numeroimg:
+            insertar_observacion(origen, muestra, especie, coordenada, tecnica, tincion, aumento, numeroimg)
             messagebox.showinfo(message="Observación creada con éxito", title="Éxito")
             ventana_obser1.destroy()
         else:
