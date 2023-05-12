@@ -15,13 +15,16 @@ def iniciar_sesion():
 
     if usuario is not None:
         messagebox.showinfo("Inicio de sesión", "Inicio de sesión exitoso")
-        ventana_login.destroy()  # Cerrar la ventana de inicio de sesión
-        mostrar_ventana_principal()  # Mostrar la ventana principal
+        if 1 == usuario[0]:
+            ventana_login.destroy()  # Cerrar la ventana de inicio de sesión
+            mostrar_ventana_principal_admin()  # Mostrar la ventana principal
+        else:
+            ventana_login.destroy()  # Cerrar la ventana de inicio de sesión
+            mostrar_ventana_principal()  # Mostrar la ventana principal
     else:
         messagebox.showerror("Inicio de sesión", "Credenciales incorrectas")
 
-
-def mostrar_ventana_principal():
+def mostrar_ventana_principal_admin():
     ventana_principal = tk.Tk()
     ventana_principal.title("Ventana Principal")
 
@@ -32,10 +35,9 @@ def mostrar_ventana_principal():
     label_fondo = tk.Label(ventana_principal, image=imagen_fondo)
     label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
 
-   
+    btn_menuadmi = tk.Button(ventana_principal, text="Menu", command=mostrar_ventana_menu)
     btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command=aplicar_filtro)
     btn_crear = tk.Button(ventana_principal, text="Crear", command=abrir_formulario_laminillas)
-    btn_menuadmi = tk.Button(ventana_principal, text="Menu", command=mostrar_ventana_menu)
     btn_treefil = tk.Button(ventana_principal, text="Filtrar Especie", command=lambda:(filtrar_datos()))
     tabla = ttk.Treeview(ventana_principal, columns=("Laminilla", "NumLaminilla", "TipoMuestra", "Especie", "Tincion","Observaciones"))
     tabla.column("#0", width=0, stretch=tk.NO)
@@ -95,6 +97,94 @@ def mostrar_ventana_principal():
     btn_filtrar.place(x=550, y= 40)
     btn_crear.place(x=600, y= 40)
     btn_menuadmi.place(x=750, y=550)
+
+    def filtrar_datos():
+        especie_filtrada = entry_lami.get()
+        tabla.delete(*tabla.get_children())
+        datos_laminilla = obtener_datos_laminilla()
+        for datos in datos_laminilla:
+            if not especie_filtrada or datos[3] == especie_filtrada:
+                tabla.insert("", "end", values=datos)
+    
+
+    # Establecer dimensiones y deshabilitar la posibilidad de cambiar el tamaño de la ventana
+    ventana_principal.geometry("800x600")  # Establecer las dimensiones deseadas
+    ventana_principal.resizable(False, False)  # Deshabilitar el cambio de tamaño
+
+    ventana_principal.mainloop()
+
+def mostrar_ventana_principal():
+    ventana_principal = tk.Tk()
+    ventana_principal.title("Ventana Principal")
+
+    # Cargar la imagen de fondo
+    imagen_fondo = tk.PhotoImage(file="img/1.png")
+
+    # Crear un Label con la imagen de fondo y colocarlo en la ventana
+    label_fondo = tk.Label(ventana_principal, image=imagen_fondo)
+    label_fondo.place(x=0, y=0, relwidth=1, relheight=1)
+
+   
+    btn_filtrar = tk.Button(ventana_principal, text="Filtrar", command=aplicar_filtro)
+    btn_crear = tk.Button(ventana_principal, text="Crear", command=abrir_formulario_laminillas)
+    btn_treefil = tk.Button(ventana_principal, text="Filtrar Especie", command=lambda:(filtrar_datos()))
+    tabla = ttk.Treeview(ventana_principal, columns=("Laminilla", "NumLaminilla", "TipoMuestra", "Especie", "Tincion","Observaciones"))
+    tabla.column("#0", width=0, stretch=tk.NO)
+    
+    tabla.heading("Laminilla", text="id Laminilla")
+    tabla.heading("NumLaminilla", text="#Laminilla")
+    tabla.heading("TipoMuestra", text="Tipo de Muestra")
+    tabla.heading("Especie", text="Especie")
+    tabla.heading("Tincion", text="Tinción")
+    tabla.heading("Observaciones", text="Observaciones")
+
+
+    tabla.column("Laminilla", width=30)
+    tabla.column("NumLaminilla", width=30)
+    tabla.column("TipoMuestra", width=40)        
+    tabla.column("Especie", width=30)    
+    tabla.column("Tincion", width=30)
+    tabla.column("Observaciones", width=50)
+    # Insertar los datos en el Treeview
+    datos_laminilla = obtener_datos_laminilla() 
+
+    for datos in datos_laminilla:
+        tabla.insert("", "end", values=datos)
+
+    tabla.update()
+
+    # Configurar el ancho y alto del Treeview
+    ancho = 550
+    alto = 400
+    tabla.configure(height=alto)
+    tabla.place(x=125, y=200, width=ancho, height=alto)
+
+    # Etiquetas 
+    btn_treefil.place(x= 150, y=110)
+
+    label_tec = tk.Label(ventana_principal, text="Tipo de tecnica:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_tec.place(x= 320, y=110)
+
+    label_tri = tk.Label(ventana_principal, text="Trincion:", background="#0b3473", font=("Arial", 16), foreground="White")
+    label_tri.place(x= 500, y=110)
+
+    # Crear un Combobox
+
+    tecnicas = consultar_tecnicas()
+    tinciones = consultar_tinciones()
+
+    entry_lami = ttk.Entry(ventana_principal)
+    entry_lami.place(x=150, y=145)
+
+    combotec = ttk.Combobox(ventana_principal,values = tecnicas)
+    combotec.place(x=320, y=145)
+
+    combotri = ttk.Combobox(ventana_principal, values = tinciones)
+    combotri.place(x=500, y=145)
+
+
+    btn_filtrar.place(x=550, y= 40)
+    btn_crear.place(x=600, y= 40)
 
     def filtrar_datos():
         especie_filtrada = entry_lami.get()

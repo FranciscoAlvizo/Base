@@ -7,14 +7,13 @@ def verificar_credenciales(matricula, password):
     cursor = conn.cursor()
 
     # Verificar las credenciales en la tabla "Usuarios"
-    cursor.execute("SELECT * FROM Usuarios WHERE Matricula=? AND Password=?", (matricula, password))
+    cursor.execute("SELECT Rol FROM Usuarios WHERE Matricula=? AND Password=?", (matricula, password))
     usuario = cursor.fetchone()
 
     # Cerrar la conexión a la base de datos
     conn.close()
 
     return usuario
-
 
 def insertar_usuario(nombre, matricula, password, rol):
     conn = sqlite3.connect("microdex.db")
