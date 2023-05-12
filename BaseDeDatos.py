@@ -60,7 +60,7 @@ def consultar_laminillas():
     laminillas = cursor.fetchall()
     return laminillas
 
-def insertar_laminilla(numerodelaminilla, tipodemuestra, especie, tincion, observacion):
+def insertar_laminillas(numerodelaminilla, tipodemuestra, especie, tincion, observacion):
     conn = sqlite3.connect("microdex.db")
     cursor = conn.cursor()
     cursor.execute(

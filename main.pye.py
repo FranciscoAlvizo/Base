@@ -327,7 +327,7 @@ def abrir_formulario_laminillas():
         tincion = combo1.get()
         observacion = combo3.get()
         if numero_laminilla and tipo_muestra and especie and tincion and observacion:
-            insertar_laminilla(numero_laminilla, tipo_muestra, especie, tincion, observacion)
+            insertar_laminillas(numero_laminilla, tipo_muestra, especie, tincion, observacion)
             messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
         else:
             messagebox.showinfo(title="Laminilla", message="Laminilla guardada con éxito")
